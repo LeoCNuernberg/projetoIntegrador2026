@@ -1,20 +1,18 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Aviso from './Aviso';
 
-type Props = { ativo: 'inicio' | 'mapa' | 'premios' };
+type Props = { ativo: 'inicio' | 'mapa' | 'premios' | 'perfil' };
 
 export default function MenuInferior({ ativo }: Props) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const [aviso, setAviso] = useState('');
 
   const corInicio = ativo === 'inicio' ? '#6540FF' : '#AAAAAA';
   const corMapa = ativo === 'mapa' ? '#6540FF' : '#AAAAAA';
   const corPremios = ativo === 'premios' ? '#6540FF' : '#AAAAAA';
+  const corPerfil = ativo === 'perfil' ? '#6540FF' : '#AAAAAA';
 
   return (
     <View style={[styles.menu, { paddingBottom: Math.max(insets.bottom, 8) }]}>
@@ -70,17 +68,17 @@ export default function MenuInferior({ ativo }: Props) {
         style={styles.botao}
         accessibilityRole="button"
         accessibilityLabel="Perfil"
-        onPress={() => setAviso('A tela de perfil será criada em uma próxima etapa.')}
+        onPress={() => {
+          if (ativo !== 'perfil') router.replace('/(tabs)/principal/perfil');
+        }}
       >
-        <Ionicons name="person-outline" size={28} color="#AAAAAA" />
-        <Text style={styles.texto}>Perfil</Text>
+        <Ionicons
+          name={ativo === 'perfil' ? 'person' : 'person-outline'}
+          size={28}
+          color={corPerfil}
+        />
+        <Text style={[styles.texto, { color: corPerfil }]}>Perfil</Text>
       </TouchableOpacity>
-
-      <Aviso
-        titulo="Em breve"
-        mensagem={aviso}
-        onFechar={() => setAviso('')}
-      />
     </View>
   );
 }

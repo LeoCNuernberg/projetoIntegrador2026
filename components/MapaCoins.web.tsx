@@ -1,7 +1,6 @@
 // Parte externa às aulas: Leaflet desenha o mapa no navegador.
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import type { Map } from 'leaflet';
 import '../styles/leaflet.css';
 import { moedas, regiaoInicial, MapaProps } from '../dados/DadosDoMapa';
 
@@ -12,7 +11,7 @@ export default function MapaCoins({ onSelecionar }: MapaProps) {
   selecionar.current = onSelecionar;
 
   useEffect(() => {
-    let mapa: Map | undefined;
+    let mapa: any;
     let saiu = false;
     let tamanho: ResizeObserver | undefined;
 

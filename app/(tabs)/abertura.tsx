@@ -24,7 +24,7 @@ export default function Abertura() {
 
     return () => clearTimeout(tempo);
 
-  }, []);
+  }, [router]);
 
 
   return (

@@ -31,12 +31,7 @@ export default function Login() {
 
 
   function esqueceuSenha() {
-
-    Alert.alert(
-      'Esqueci a senha',
-      'Essa página será criada depois.'
-    );
-
+    router.push('/(tabs)/esqueciasenhapt1');
   }
 
 
@@ -230,6 +225,15 @@ export default function Login() {
 
         </TouchableOpacity>
 
+        <View style={styles.cadastroArea}>
+          <Text style={styles.cadastroTexto}>Ainda não tem uma conta?</Text>
+          <TouchableOpacity
+            onPress={() => router.push('/(tabs)/cadastropt1')}
+            accessibilityRole="button"
+          >
+            <Text style={styles.cadastroLink}>Cadastre-se</Text>
+          </TouchableOpacity>
+        </View>
 
       </View>
 
@@ -260,6 +264,7 @@ const styles = StyleSheet.create({
 
   card: {
     width: '100%',
+    maxWidth: 520,
 
     borderWidth: 1,
     borderColor: '#DDD6FF',
@@ -376,6 +381,25 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+
+  cadastroArea: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 4,
+    gap: 4,
+  },
+
+  cadastroTexto: {
+    color: '#777777',
+    fontSize: 11,
+  },
+
+  cadastroLink: {
+    color: '#6540FF',
+    fontSize: 11,
+    fontWeight: '700',
+  },
 
   textoSecundario: {
     flex: 1,
