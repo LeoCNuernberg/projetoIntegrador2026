@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "MoneyWay",
+    "slug": "moneyway",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "moneyway",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

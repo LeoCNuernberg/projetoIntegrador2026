@@ -8,15 +8,20 @@ import {
 } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import MenuInferior from '../../../components/MenuInferior';
 import AtividadesHoje from '../../../components/AtividadesHoje';
 
 
 export default function Index() {
 
+  const router = useRouter();
+
   return (
 
     <View style={styles.container}>
+
+      <View style={styles.conteudo}>
 
       <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -287,7 +292,10 @@ export default function Index() {
           </View>
 
 
-          <TouchableOpacity style={styles.botaoResgatar}>
+          <TouchableOpacity
+            style={styles.botaoResgatar}
+            onPress={() => router.push('/(tabs)/principal/premios')}
+          >
 
             <Text style={styles.textoBotao}>
               Resgatar
@@ -306,6 +314,8 @@ export default function Index() {
 
       <MenuInferior ativo="inicio" />
 
+      </View>
+
     </View>
 
   );
@@ -317,6 +327,14 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+  },
+
+  conteudo: {
+    flex: 1,
+    width: '100%',
+    maxWidth: 600,
     backgroundColor: '#FFFFFF',
   },
 

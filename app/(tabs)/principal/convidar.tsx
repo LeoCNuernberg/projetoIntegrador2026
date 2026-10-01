@@ -10,8 +10,11 @@ import {
 } from 'react-native';
 
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 
 export default function Convidar() {
+
+  const router = useRouter();
 
   const [editando, setEditando] = useState(false);
   const [codigo, setCodigo] = useState('Nalu1910');
@@ -26,6 +29,7 @@ export default function Convidar() {
     <View style={styles.app}>
 
       <ScrollView
+        style={styles.scroll}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}
       >
@@ -33,10 +37,19 @@ export default function Convidar() {
         {/* IMAGEM DO TOPO */}
 
         <ImageBackground
-          source={require('../../assets/images/convidar-fundo.png')}
+          source={require('../../../assets/images/convidar-fundo.png')}
           style={styles.fundo}
           resizeMode="cover"
-        />
+        >
+          <Pressable
+            style={styles.botaoVoltar}
+            onPress={() => router.back()}
+            accessibilityRole="button"
+            accessibilityLabel="Voltar para o perfil"
+          >
+            <Text style={styles.setaVoltar}>‹</Text>
+          </Pressable>
+        </ImageBackground>
 
         {/* CONTEÚDO */}
 
@@ -102,7 +115,7 @@ export default function Convidar() {
                 {/* FOTO DO USUÁRIO */}
 
                 <Image
-                  source={require('../../assets/images/usuario.cadastropt1.png')}
+                  source={require('../../../assets/images/usuario.cadastropt1.png')}
                   style={styles.icone}
                   resizeMode="cover"
                 />
@@ -124,7 +137,7 @@ export default function Convidar() {
           {/* MASCOTE */}
 
           <Image
-            source={require('../../assets/images/mascote-convidar.png')}
+            source={require('../../../assets/images/mascote-convidar.png')}
             style={styles.mascote}
             resizeMode="contain"
           />
@@ -145,8 +158,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
 
+  scroll: {
+    width: '100%',
+    maxWidth: 600,
+    alignSelf: 'center',
+  },
+
   container: {
     flexGrow: 1,
+  },
+
+  botaoVoltar: {
+    position: 'absolute',
+    top: 18,
+    left: 18,
+    width: 44,
+    height: 44,
+    zIndex: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 22,
+  },
+
+  setaVoltar: {
+    color: '#542BFF',
+    fontSize: 36,
+    lineHeight: 38,
   },
 
   /* TOPO — NÃO ALTERADO */

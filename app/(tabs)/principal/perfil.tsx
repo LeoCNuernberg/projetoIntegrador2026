@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -27,6 +28,7 @@ const amigos: Amigo[] = [
 ];
 
 export default function Perfil() {
+  const router = useRouter();
   const [nomeUsuario, setNomeUsuario] = useState('Nalu');
   const [tituloAviso, setTituloAviso] = useState('');
   const [mensagemAviso, setMensagemAviso] = useState('');
@@ -37,8 +39,7 @@ export default function Perfil() {
   }
 
   function convidarAmigo() {
-    setTituloAviso('Convide seus amigos');
-    setMensagemAviso('Convite preparado! Compartilhe o MoneyWay com seus amigos e ganhe EcoCoins.');
+    router.push('/(tabs)/principal/convidar');
   }
 
   function renderAmigo({ item }: { item: Amigo }) {

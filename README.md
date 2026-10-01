@@ -108,38 +108,67 @@ Assim que o comando for executado, um **QR Code** e um menu interativo aparecer�
 ## 📂 Estrutura de Pastas
 
 ```
-📁 Aplicativo/
-├── 📁 app/                     # Rotas e Telas (Expo Router - baseado em arquivos)
-│   ├── (tabs)/                # Navegação por abas inferiores
-│   │   ├── index.tsx          # Tela inicial
-│   │   ├── explore.tsx        # Tela de exploração
-│   │   └── _layout.tsx        # Layout das abas
-│   ├── _layout.tsx            # Layout raiz da aplicação
-│   ├── 📁 components/         # Componentes visuais reutilizáveis
-│   └── 📁 rotaServidor/       # Serviços de integração com a API Backend
-│       ├── api.ts             # Cliente HTTP com fetch e suporte a Bearer Token
-│       ├── produtos.tsx       # CRUD de Produtos
-│       └── user.tsx           # CRUD de Usuários
-│
-├── 📁 assets/                  # Imagens, ícones e fontes
-├── .env.exemplo               # Modelo de variáveis de ambiente
-├── .env                       # Suas variáveis locais (não comitar)
-├── app.json                   # Configurações do Expo (nome do app, ícones, slug)
-├── package.json               # Dependências e scripts
-└── tsconfig.json              # Configurações do TypeScript
+📁 Projeto Integrador/
+├── 📁 app/                         # Somente rotas/telas do Expo Router
+│   ├── 📁 (tabs)/
+│   │   ├── abertura.tsx
+│   │   ├── login.tsx
+│   │   ├── cadastropt1.tsx
+│   │   ├── cadastropt2.tsx
+│   │   ├── esqueciasenhapt1.tsx
+│   │   ├── esqueciasenhapt2.tsx
+│   │   ├── opcoesdinheiro.tsx
+│   │   ├── 📁 principal/           # Área interna do aplicativo
+│   │   │   ├── index.tsx
+│   │   │   ├── mapa.tsx
+│   │   │   ├── premios.tsx
+│   │   │   ├── perfil.tsx
+│   │   │   └── convidar.tsx
+│   │   └── _layout.tsx
+│   └── _layout.tsx
+├── 📁 components/                  # Componentes visuais reutilizáveis
+├── 📁 services/                    # Comunicação com a API; não são rotas
+│   ├── api.ts
+│   ├── produtos.ts
+│   └── user.ts
+├── 📁 dados/                       # Dados usados nas telas
+├── 📁 assets/                      # Imagens e ícones
+├── 📁 examples/                    # Exemplos que não viram telas do app
+├── .env.exemplo
+├── app.json
+├── package.json
+└── tsconfig.json
 ```
+
+---
+
+## 🔁 Fluxo de Navegação
+
+```text
+Abertura → Login
+
+Login → Entrar → Início
+Login → Cadastre-se → Cadastro 1 → Cadastro 2 → Opções de dinheiro → Início
+Login → Esqueci a senha → Recuperação 1 → Recuperação 2 → Login
+
+Início ⇄ Mapa ⇄ Prêmios ⇄ Perfil
+Início → Resgatar → Prêmios
+Perfil → Convidar → Tela de convite → Voltar para Perfil
+```
+
+As telas usam o Expo Router e os botões de navegação chamam `router.push`, `router.replace` ou `router.back`, conforme o fluxo.
 
 ---
 
 ## 📡 Como Consumir a API do Servidor
 
-A pasta `app/rotaServidor/` contém serviços prontos que facilitam a comunicação com o servidor `https://senac.pizzarapida.net/api`.
+A pasta `services/` contém serviços prontos que facilitam a comunicação com o servidor `https://senac.pizzarapida.net/api`.
 
 ### Exemplo: Listar e Cadastrar Produtos
 ```tsx
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
-import produtosService, { Produto } from "@/app/rotaServidor/produtos";
+import produtosService, { Produto } from "@/services/produtos";
 
 export default function CatalogoScreen() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
