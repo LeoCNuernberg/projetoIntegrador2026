@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 
   /* ÁREA CENTRAL IGUAL À IMAGEM */
   app: {
-    width: 440,
+    width: 550,
     maxWidth: "100%",
     minHeight: "100%",
     backgroundColor: "#F5F4FC",
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     color: "#33335C",
     textAlign: "center",
     marginBottom: 30,
+    top: -10,
   },
 
   titulo: {
@@ -136,7 +137,8 @@ const styles = StyleSheet.create({
   imagem: {
     width: 180,
     height: 175,
-    marginBottom: 15,
+    marginBottom: 45,
+    top: 15,
   },
 
   botao: {
