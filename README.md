@@ -1,235 +1,52 @@
-# Aplicativo Mobile - Projeto Integrador SENAC 2026 📱🎓
+# EUREKA! 💡 — Projeto Integrador / ODS 4
 
-**Curso Técnico em Desenvolvimento de Sistemas / Programação**  
-**Instituição:** SENAC (Serviço Nacional de Aprendizagem Comercial)
+Aplicativo de dúvidas e respostas para estudantes, feito em **React Native + Expo Router + TypeScript**. Evolução do antigo MoneyWay: as telas foram reconstruídas para a proposta educativa, mantendo a base de navegação, organização TSX e técnicas do professor.
 
----
+## Rodar no seu PC
 
-## 📌 Sobre o Projeto
+1. Abra a pasta **Eureka** no VS Code.
+2. Instale Node.js caso não tenha.
+3. No terminal, execute `npm install` (primeira vez).
+4. Execute `npx expo start`.
+5. Aperte `w` para abrir no navegador ou use o QR Code do Expo Go no celular.
 
-Este repositório contém a **base do aplicativo mobile** desenvolvido em **React Native** com **Expo** e **TypeScript**.
+## Telas incluídas
 
-Todos os projetos das equipes partem desta mesma base compartilhada de código e estrutura, porém **cada equipe desenvolverá um tema/nicho diferente** e terá total autonomia para criar suas próprias interfaces, navegação, componentes e regras de negócio.
+- Abertura com identidade própria
+- Entrada e cadastro de perfil de teste
+- Feed com filtros por disciplina
+- Busca de perguntas e assuntos
+- Formulário para publicar dúvidas
+- Tela individual com respostas, curtidas e seleção da melhor resposta pelo autor
+- Ranking e pontuação XP
+- Perfil e histórico de perguntas
+- Perguntas salvas + Modo Revisão
 
----
+## Como testar
 
-## 👥 Organização das Equipes e Fluxo de Trabalho (Fork)
+1. Toque em **Começar agora** e escreva seu nome.
+2. No **Início**, filtre as disciplinas e toque em uma pergunta.
+3. Publique uma resposta em pergunta de outro estudante. Ela aparecerá no histórico e somará XP.
+4. Abra **Perguntar**, publique uma pergunta e visualize sua página.
+5. Para testar **Marcar solução**, crie uma pergunta com um nome, saia e entre com outro nome para respondê-la; depois retorne ao primeiro nome e marque uma resposta. A verificação é ilustrativa, não autenticação segura.
+6. Salve perguntas pelo ícone e abra **Perfil → Minhas perguntas salvas**.
 
-O backend e o banco de dados são gerenciados centralmente pelo professor e já se encontram hospedados em produção. As equipes têm acesso exclusivo ao código do aplicativo através do modelo de **Fork**.
+## IMPORTANTE — Limitações do protótipo
 
-```
-  [ Repositório Base - Aplicativo ] (Professor)
-                │
-   ┌────────────┼────────────┐ (Forks de cada equipe)
-   ▼            ▼            ▼
-[Fork Equipe 1] [...]  [Fork Equipe 7]
- (Tema: X)              (Tema: Y)
-```
+Esta versão é um **protótipo funcional para demonstração escolar**, não uma rede social pública com login real. Os nomes, respostas e notas do ranking inicial são fictícios. Não existe autenticação por senha e nenhum backend compartilhado foi configurado. Os dados são mantidos com React Context e `useState`; no **navegador**, tentamos persistir com `localStorage` entre recarregamentos; no **celular**, os dados criados ficam apenas durante a sessão atual. Pessoas em aparelhos diferentes não enxergam suas publicações umas das outras.
 
-### 📋 Diretrizes para a Equipe:
-1. **Fork do Projeto:** O gestor ou um membro representante da equipe deve criar um **Fork** deste repositório na sua conta do GitHub/GitLab.
-2. **Gerenciamento de Membros:** O gestor da equipe deve adicionar os demais integrantes como colaboradores do fork.
-3. **Autonomia:** A equipe pode criar suas próprias branches, issues, quadros Kanban e convenções internas de commits.
-4. **Token de Acesso:** O `EXPO_PUBLIC_API_TOKEN` para autenticação na API será repassado pelo professor diretamente ao **gestor de cada equipe**.
+**Antes de colocar alunos reais usando o app** será necessário implementar login seguro, banco de dados compartilhado, validação de dados e moderação/denúncias.
 
----
+## ODS relacionada
 
-## ⚙️ Pré-requisitos
+**ODS 4 — Educação de qualidade**: aprendizagem colaborativa, auxílio mútuo, inclusão no acesso a respostas e revisão de conteúdos. Métricas para apresentar à banca: quantidade de perguntas, número de respostas, dúvidas solucionadas e participação em testes.
 
-Antes de iniciar, certifique-se de possuir em seu computador:
-- [Node.js](https://nodejs.org/) (Versão LTS 18 ou superior instalada)
-- [Git](https://git-scm.com/) instalado e configurado
-- [Expo Go](https://expo.dev/go) instalado no seu celular (disponível na Google Play Store e Apple App Store) **OU** emulador configurado (Android Studio / Xcode).
+## Organização
 
----
+- `app/(tabs)/` — abertura e perfis de demonstração
+- `app/(tabs)/principal/` — páginas internas do Eureka
+- `components/` — card, navegação inferior, cabeçalho e layout compartilhados
+- `context/EurekaContext.tsx` — estado, dados de demonstração e ações
+- `theme/cores.ts` — paleta verde e azul-escuro
 
-## 🚀 Como Iniciar o Projeto (Passo a Passo)
-
-### 1. Clonar o Fork da sua Equipe
-```bash
-git clone https://github.com/SEU-USUARIO-OU-EQUIPE/NOME-DO-FORK.git
-cd NOME-DO-FORK
-```
-
-### 2. Instalar as Dependências
-Execute o comando abaixo dentro da pasta do projeto:
-```bash
-npm install
-```
-
-### 3. Configurar as Variáveis de Ambiente (`.env`)
-Copie o arquivo `.env.exemplo` para criar o seu `.env`:
-
-- **No Windows (PowerShell):**
-  ```powershell
-  Copy-Item .env.exemplo .env
-  ```
-- **No Linux / macOS / Bash:**
-  ```bash
-  cp .env.exemplo .env
-  ```
-
-Abra o arquivo `.env` gerado e preencha com as credenciais da sua equipe:
-```env
-# URL oficial da API do servidor SENAC
-EXPO_PUBLIC_API_URL=https://senac.pizzarapida.net/api
-
-# Substitua pelo Token fornecido pelo professor ao gestor da sua equipe
-EXPO_PUBLIC_API_TOKEN=seu_token_fornecido_pelo_professor
-```
-
-> ⚠️ **IMPORTANTE:** Nunca compartilhe nem comite o arquivo `.env` com chaves reais no Git! Ele já está listado no `.gitignore`.
-
----
-
-### 4. Executar o Aplicativo
-
-Inicie o servidor de desenvolvimento do Expo:
-```bash
-npx expo start
-```
-*(ou simplesmente `npm start`)*
-
----
-
-### 5. Abrir e Testar a Aplicação
-
-Assim que o comando for executado, um **QR Code** e um menu interativo aparecerão no terminal:
-
-- 📱 **No Celular Físico (Recomendado):**
-  - Abra o aplicativo **Expo Go** no Android e selecione *"Scan QR Code"* (ou use a câmera no iOS) e aponte para o QR Code no terminal.
-  - *Dica:* Certifique-se de que o computador e o celular estejam conectados na **mesma rede Wi-Fi**.
-- 🤖 **No Emulador Android:** Pressione a tecla `a` no terminal.
-- 🍏 **No Simulador iOS (macOS):** Pressione a tecla `i` no terminal.
-- 🌐 **No Navegador Web:** Pressione a tecla `w` no terminal.
-
----
-
-## 📂 Estrutura de Pastas
-
-```
-📁 Projeto Integrador/
-├── 📁 app/                         # Somente rotas/telas do Expo Router
-│   ├── 📁 (tabs)/
-│   │   ├── abertura.tsx
-│   │   ├── login.tsx
-│   │   ├── cadastropt1.tsx
-│   │   ├── cadastropt2.tsx
-│   │   ├── esqueciasenhapt1.tsx
-│   │   ├── esqueciasenhapt2.tsx
-│   │   ├── opcoesdinheiro.tsx
-│   │   ├── 📁 principal/           # Área interna do aplicativo
-│   │   │   ├── index.tsx
-│   │   │   ├── mapa.tsx
-│   │   │   ├── premios.tsx
-│   │   │   ├── perfil.tsx
-│   │   │   └── convidar.tsx
-│   │   └── _layout.tsx
-│   └── _layout.tsx
-├── 📁 components/                  # Componentes visuais reutilizáveis
-├── 📁 services/                    # Comunicação com a API; não são rotas
-│   ├── api.ts
-│   ├── produtos.ts
-│   └── user.ts
-├── 📁 dados/                       # Dados usados nas telas
-├── 📁 assets/                      # Imagens e ícones
-├── 📁 examples/                    # Exemplos que não viram telas do app
-├── .env.exemplo
-├── app.json
-├── package.json
-└── tsconfig.json
-```
-
----
-
-## 🔁 Fluxo de Navegação
-
-```text
-Abertura → Login
-
-Login → Entrar → Início
-Login → Cadastre-se → Cadastro 1 → Cadastro 2 → Opções de dinheiro → Início
-Login → Esqueci a senha → Recuperação 1 → Recuperação 2 → Login
-
-Início ⇄ Mapa ⇄ Prêmios ⇄ Perfil
-Início → Resgatar → Prêmios
-Perfil → Convidar → Tela de convite → Voltar para Perfil
-```
-
-As telas usam o Expo Router e os botões de navegação chamam `router.push`, `router.replace` ou `router.back`, conforme o fluxo.
-
----
-
-## 📡 Como Consumir a API do Servidor
-
-A pasta `services/` contém serviços prontos que facilitam a comunicação com o servidor `https://senac.pizzarapida.net/api`.
-
-### Exemplo: Listar e Cadastrar Produtos
-```tsx
-import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
-import produtosService, { Produto } from "@/services/produtos";
-
-export default function CatalogoScreen() {
-  const [produtos, setProdutos] = useState<Produto[]>([]);
-  const [carregando, setCarregando] = useState(true);
-
-  useEffect(() => {
-    async function carregar() {
-      try {
-        const dados = await produtosService.listarTodos();
-        setProdutos(dados);
-      } catch (error) {
-        console.error("Erro ao buscar produtos:", error);
-      } finally {
-        setCarregando(false);
-      }
-    }
-
-    carregar();
-  }, []);
-
-  if (carregando) {
-    return <ActivityIndicator size="large" color="#0066cc" style={{ flex: 1 }} />;
-  }
-
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.titulo}>{item.nome}</Text>
-            <Text style={styles.preco}>R$ {Number(item.preco).toFixed(2)}</Text>
-            {item.descricao && <Text style={styles.descricao}>{item.descricao}</Text>}
-          </View>
-        )}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: "#f5f5f5" },
-  card: { backgroundColor: "#fff", padding: 16, borderRadius: 8, marginBottom: 12, elevation: 2 },
-  titulo: { fontSize: 18, fontWeight: "bold", color: "#333" },
-  preco: { fontSize: 16, color: "#008844", marginTop: 4 },
-  descricao: { fontSize: 14, color: "#666", marginTop: 4 },
-});
-```
-
----
-
-## 💡 Dicas de Sucesso para a Equipe
-
-1. **Personalização:** Atualize o `app.json` com o nome da sua aplicação e o nome da sua equipe.
-2. **Design e Usabilidade:** Utilize componentes modernos, boas cores e tipografia clara para valorizar a apresentação do projeto integrador.
-3. **Divisão de Tarefas:** Dividam as telas e componentes entre os membros da equipe para que todos participem ativamente do desenvolvimento.
-4. **Dúvidas com a API:** O gestor da equipe deve alinhar com o professor caso necessitem de novos endpoints ou ajustes nos modelos de dados.
-
----
-
-## 📜 Licença
-
-Projeto desenvolvido para fins educacionais no **SENAC (2026)**.
+O projeto pode ser executado sem API externa ou chave de acesso. Não inclua senhas ou dados reais nos testes.
